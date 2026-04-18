@@ -7,13 +7,21 @@ import os
 from modules.password_logic import analyze_password, generate_password
 from modules.packet_logic import analyze_packets
 from modules.soc_logic import analyze_logs, generate_soc_report
-from modules.malware_logic import (
-    start_monitoring,
-    stop_monitoring,
-    get_alerts,
-    is_monitoring,
-    get_global_threat_score
-)
+try:
+    from modules.malware_logic import (
+        start_monitoring,
+        stop_monitoring,
+        get_alerts,
+        is_monitoring,
+        get_global_threat_score
+    )
+except:
+    # fallback for cloud
+    def start_monitoring(): pass
+    def stop_monitoring(): pass
+    def get_alerts(): return []
+    def is_monitoring(): return False
+    def get_global_threat_score(): return 0
 
 # ================================
 # INITIALIZE APP
