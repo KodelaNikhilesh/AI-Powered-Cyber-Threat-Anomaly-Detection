@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container slide-in">
+
+    <h2>🛡️ AI Mini-SOC Threat Intelligence Engine</h2>
+
+    <!-- MODULE DESCRIPTION -->
+    <div class="info-box">
+        <p><b>This module detects:</b></p>
+        <ul>
+            <li>SSH brute-force attacks</li>
+            <li>Credential stuffing behavior</li>
+            <li>Compromised account patterns</li>
+            <li>Geo-IP based suspicious logins</li>
+            <li>ML-based anomaly detection</li>
+        </ul>
+    </div>
+
+    <!-- UPLOAD FORM -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <br><br>
+        <button type="submit" class="btn">🔍 Analyze Logs</button>
+    </form>
+
+    {% if result %}
+
+    <hr>
+
+    <!-- SOC THREAT SCORE -->
+    <div class="info-box" style="text-align:center;">
+        <h3>🧠 SOC Threat Score: {{ result.soc_score }}%</h3>
+    </div>
+
+    <!-- ALERT TABLE -->
+    <h3>🚨 Detected Threats</h3>
+
+    <div class="table-wrapper">
+        <table class="soc-table">
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Country</th>
+                    <th>Failed Attempts</th>
+                    <th>Users Targeted</th>
+                    <th>Risk Score</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in result.alerts %}
+                <tr>
+                    <td>{{ a.ip }}</td>
+                    <td>{{ a.country }}</td>
+                    <td>{{ a.count }}</td>
+                    <td>{{ a.users }}</td>
+                    <td>{{ a.risk_score }}</td>
+                    <td class="{{ a.severity|lower }}">{{ a.severity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- TOP TARGETED USERS -->
+    <h3>🎯 Top Targeted Usernames</h3>
+
+    {% if result.top_users %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Attempts</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user, count in result.top_users %}
+                <tr>
+                    <td>{{ user }}</td>
+                    <td>{{ count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No targeted username data available.</p>
+    {% endif %}
+
+    <hr>
+
+    <!-- GRAPHS -->
+    <h3>📊 Attack Visualizations</h3>
+
+    <img src="/static/attacks.png" width="90%">
+    <br><br>
+    <img src="/static/timeline_soc.png" width="90%">
+    <br><br>
+    <img src="/static/users.png" width="90%">
+
+    <hr>
+
+    <!-- DOWNLOAD REPORT -->
+    <div class="download-box">
+        <a href="/download/{{ report_path }}" class="download-btn">
+            ⬇ Download SOC Report
+        </a>
+    </div>
+
+    {% endif %}
+
+    <br><br>
+
+    <!-- BACK BUTTON -->
+    <button onclick="window.history.back();" class="btn">
+        ⬅ Back
+    </button>
+
+</div>
+
+{% endblock %}
+

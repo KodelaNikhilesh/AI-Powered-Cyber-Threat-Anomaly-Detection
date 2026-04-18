@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-wrapper slide-in">
+
+    <h1 class="dashboard-title">📘 System Documentation & User Guide</h1>
+
+    <!-- ================= INTRO ================= -->
+    <div class="glass-box wide">
+        <h3>🔍 Platform Overview</h3>
+        <p>
+            This AI-powered cybersecurity platform integrates multiple security layers
+            including password analysis, network monitoring, intrusion detection,
+            and real-time malware behavior tracking into a single intelligent system.
+        </p>
+    </div>
+
+    <!-- ================= ACCORDION ================= -->
+    <div class="docs-container">
+
+        <!-- PASSWORD -->
+        <div class="doc-card" onclick="toggleDoc(this)">
+            <h3>🔐 Password Security Module</h3>
+            <div class="doc-content">
+                <p><b>What it does:</b></p>
+                <ul>
+                    <li>Analyzes password strength using entropy</li>
+                    <li>Estimates crack time</li>
+                    <li>Generates secure passwords</li>
+                    <li>Enhances weak passwords (AI-based improvement)</li>
+                </ul>
+
+                <p><b>How to use:</b></p>
+                <ol>
+                    <li>Enter password</li>
+                    <li>Click Analyze</li>
+                    <li>View strength & crack time</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- NETWORK -->
+        <div class="doc-card" onclick="toggleDoc(this)">
+            <h3>🌐 Network Packet Analyzer</h3>
+            <div class="doc-content">
+                <p><b>What it does:</b></p>
+                <ul>
+                    <li>Analyzes PCAP / CSV files</li>
+                    <li>Detects suspicious IP traffic</li>
+                    <li>Uses ML anomaly detection</li>
+                    <li>Generates charts + PDF reports</li>
+                </ul>
+
+                <p><b>How to use:</b></p>
+                <ol>
+                    <li>Export file from Wireshark</li>
+                    <li>Upload file</li>
+                    <li>Click Analyze</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- SOC -->
+        <div class="doc-card" onclick="toggleDoc(this)">
+            <h3>🛡️ Mini-SOC IDS</h3>
+            <div class="doc-content">
+                <p><b>What it does:</b></p>
+                <ul>
+                    <li>Detects brute-force attacks</li>
+                    <li>Identifies credential stuffing</li>
+                    <li>Geo-IP based risk detection</li>
+                    <li>ML anomaly detection</li>
+                </ul>
+
+                <p><b>How to use:</b></p>
+                <ol>
+                    <li>Upload log file</li>
+                    <li>Click Analyze</li>
+                    <li>View threat score</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- MALWARE -->
+        <div class="doc-card" onclick="toggleDoc(this)">
+            <h3>🦠 AI Behavioral Malware Detection</h3>
+            <div class="doc-content">
+                <p><b>What it does:</b></p>
+                <ul>
+                    <li>Monitors files in real-time</li>
+                    <li>Detects abnormal behavior patterns</li>
+                    <li>Identifies ransomware-like activity</li>
+                    <li>Calculates global threat score</li>
+                </ul>
+
+                <p><b>How to use:</b></p>
+                <ol>
+                    <li>Click Start Monitoring</li>
+                    <li>System tracks file activity</li>
+                    <li>Alerts shown in real-time</li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= AI EXPLANATION ================= -->
+    <div class="glass-box wide">
+        <h3>🧠 AI & Machine Learning</h3>
+        <p>
+            The system uses Isolation Forest algorithm to detect anomalies in data.
+            It learns normal behavior patterns and flags unusual activities such as
+            abnormal traffic, login attempts, and file behavior without predefined rules.
+        </p>
+    </div>
+
+    <!-- ================= THREAT SCORE ================= -->
+    <div class="glass-box compact">
+        <h3>📊 Threat Score Meaning</h3>
+        <ul>
+            <li><b>0–30:</b> Low Risk (Safe)</li>
+            <li><b>30–60:</b> Medium Risk</li>
+            <li><b>60–100:</b> High Risk</li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function toggleDoc(card) {
+    card.classList.toggle("active");
+}
+</script>
+
+{% endblock %}

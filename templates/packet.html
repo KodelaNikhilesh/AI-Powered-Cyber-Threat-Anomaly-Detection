@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container slide-in">
+    <h2>🌐 AI Network Intelligence & Packet Analyzer</h2>
+
+    <!-- HOW TO USE -->
+    <div class="info-box">
+        <p><b>How to use:</b></p>
+        <ul>
+            <li>Export packets from Wireshark as CSV or PCAPNG</li>
+            <li>Upload the file for AI-based analysis</li>
+            <li>View network risk score, IP intelligence & anomaly detection</li>
+        </ul>
+    </div>
+
+    <!-- UPLOAD -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <br><br>
+        <button type="submit" class="btn">🔍 Analyze Packets</button>
+    </form>
+
+    {% if analysis %}
+
+    <hr>
+
+    <!-- SUMMARY -->
+    <div class="info-box">
+        <p><b>Total Packets:</b> {{ analysis.total_packets }}</p>
+        <p><b>Anomalies Detected:</b> {{ analysis.anomaly_count }}</p>
+        <p><b>Network Risk Score:</b> {{ analysis.network_risk }}%</p>
+    </div>
+
+    <!-- CHARTS -->
+    <h3>📊 Network Visualizations</h3>
+    <img src="/static/charts/protocols.png" width="90%">
+    <br><br>
+    <img src="/static/charts/sources.png" width="90%">
+    <br><br>
+    <img src="/static/charts/timeline.png" width="90%">
+
+    <hr>
+
+    <!-- SOURCE → DESTINATION TABLE -->
+    <h3>🔗 Top Source → Destination Traffic</h3>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Source IP</th>
+                    <th>Destination IP</th>
+                    <th>Protocol</th>
+                    <th>Packet Count</th>
+                    <th>Total Bytes</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in analysis.traffic_matrix %}
+                <tr>
+                    <td>{{ row.Source }}</td>
+                    <td>{{ row.Destination }}</td>
+                    <td>{{ row.Protocol }}</td>
+                    <td>{{ row.Packet_Count }}</td>
+                    <td>{{ row.Total_Bytes }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- SUSPICIOUS IP TABLE -->
+    <h3>⚠ Suspicious IPs</h3>
+
+    {% if analysis.suspicious_ips %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>IP Address</th>
+                    <th>Risk Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ip in analysis.suspicious_ips %}
+                <tr>
+                    <td>{{ ip.ip }}</td>
+                    <td>{{ ip.score }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No suspicious IP behavior detected.</p>
+    {% endif %}
+
+    <hr>
+
+    <!-- DOWNLOAD BUTTON BOX -->
+    <div class="download-box">
+    <a href="/download/{{ analysis.report }}" class="download-btn">
+        ⬇ Download AI Network Report
+    </a>
+</div>
+
+
+    {% endif %}
+
+    <br><br>
+
+    <!-- CLEAN BACK BUTTON -->
+    <button onclick="window.history.back();" class="btn">
+        ⬅ Back
+    </button>
+
+</div>
+
+{% endblock %}

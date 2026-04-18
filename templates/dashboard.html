@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-wrapper">
+
+    <!-- ================= TITLE ================= -->
+    <h1 class="dashboard-title">
+        AI Powered Cyber Threat & Anomaly Detection
+    </h1>
+
+    <!-- ================= CORE MODULES ================= -->
+    <div class="modules-row">
+
+        <!-- MODULE 4 -->
+        <a href="/malware" class="module-glass">
+            <h2>🦠 AI Real-Time Behavioral Malware Detection</h2>
+            <p>
+                Core AI engine that monitors system behavior in real-time,
+                detects file anomalies, entropy irregularities, mass deletion
+                patterns, and advanced behavioral threats.
+            </p>
+        </a>
+
+        <!-- MODULE 2 -->
+        <a href="/packet" class="module-glass">
+            <h2>🌐 Network Packet Analyzer</h2>
+            <p>
+                Analyze packet-level network traffic, detect abnormal flows,
+                suspicious IP behavior, protocol misuse, and generate AI-driven
+                traffic intelligence reports.
+            </p>
+        </a>
+
+        <!-- MODULE 3 -->
+        <a href="/soc" class="module-glass">
+            <h2>🛡️ Mini-SOC IDS</h2>
+            <p>
+                Detect SSH brute-force attacks, credential stuffing,
+                geo-location risks, and authentication anomalies
+                using ML-based log analysis.
+            </p>
+        </a>
+
+        <!-- MODULE 1 -->
+        <a href="/password" class="module-glass">
+            <h2>🔐 Password Security</h2>
+            <p>
+                Evaluate password entropy, estimate crack time,
+                generate strong credentials, and detect weak security practices.
+            </p>
+        </a>
+
+    </div>
+
+    <!-- ================= CENTRAL THREAT SUMMARY ================= -->
+    <div class="glass-box wide threat-summary">
+
+        <h3>🛡️ Central AI Threat Monitor</h3>
+
+        <div class="threat-score-display">
+            <span class="score-number">{{ threat_score }}%</span>
+            <span id="threatStatus" class="score-label">Evaluating...</span>
+        </div>
+
+        <!-- Animated Meter -->
+        <div class="meter-bar">
+            <div id="meterFill" class="meter-fill"></div>
+        </div>
+
+        <p class="threat-description">
+            This score aggregates intelligence from malware monitoring,
+            network anomaly detection, and intrusion analysis modules.
+            It dynamically updates based on detected risk intensity.
+        </p>
+
+    </div>
+
+    <!-- ================= PLATFORM MISSION ================= -->
+    <div class="glass-box wide">
+        <h3>🎯 Platform Mission</h3>
+        <p>
+            This platform is designed to provide multi-layered AI-powered
+            cyber defense by integrating system monitoring, network analysis,
+            authentication intelligence, and cryptographic strength evaluation
+            into a unified intelligent security architecture.
+        </p>
+
+        <h3>🧠 AI Detection Engine Architecture</h3>
+        <ul>
+            <li>Behavioral anomaly detection using statistical models</li>
+            <li>Isolation Forest for abnormal activity identification</li>
+            <li>Entropy-based malware detection</li>
+            <li>Event burst & mass-deletion behavioral tracking</li>
+            <li>Geo-IP risk analysis for authentication attempts</li>
+        </ul>
+
+        <h3>🔍 Multi-Layer Threat Detection Layers</h3>
+        <ul>
+            <li>Layer 1 – Credential Security & Password Risk Analysis</li>
+            <li>Layer 2 – Network Traffic & Protocol Intelligence</li>
+            <li>Layer 3 – Authentication & Intrusion Detection (SOC)</li>
+            <li>Layer 4 – Real-Time Behavioral Malware Monitoring</li>
+        </ul>
+
+        <h3>📊 Intelligence & Risk Scoring System</h3>
+        <p>
+            The platform aggregates risk scores from different modules to
+            generate a centralized security posture view.
+        </p>
+    </div>
+
+    <!-- ================= FUTURE ROADMAP ================= -->
+    <div class="glass-box compact">
+        <h3>🚀 Future Roadmap</h3>
+        <ul>
+            <li>Centralized Threat Intelligence Dashboard</li>
+            <li>Real-Time Attack Correlation Engine</li>
+            <li>AI-based Malware Classification Model (Deep Learning)</li>
+            <li>Automated Threat Response System</li>
+            <li>Cloud Threat Intelligence Integration</li>
+            <li>Role-Based Access Control (RBAC)</li>
+        </ul>
+    </div>
+
+    <footer class="dashboard-footer">
+        <p>© 2026 AI Powered Cyber Threat & Anomaly Detection Platform</p>
+        <p class="version">Version 2.5 – 16-04-2026</p>
+    </footer>
+
+</div>
+
+<!-- ================= ANIMATION SCRIPT ================= -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const score = Number("{{ threat_score | default(0) }}");
+
+    const meter = document.getElementById("meterFill");
+    const status = document.getElementById("threatStatus");
+
+    if (!meter || !status) return;
+
+    setTimeout(() => {
+        meter.style.width = score + "%";
+    }, 300);
+
+    if (score < 30) {
+        meter.style.background = "#22c55e";
+        status.innerText = "LOW RISK – System Stable";
+    }
+    else if (score < 60) {
+        meter.style.background = "#facc15";
+        status.innerText = "MEDIUM RISK – Monitor Closely";
+    }
+    else if (score < 80) {
+        meter.style.background = "#f97316";
+        status.innerText = "HIGH RISK – Suspicious Activity";
+    }
+    else {
+        meter.style.background = "#ef4444";
+        status.innerText = "CRITICAL – Immediate Action Required";
+    }
+
+});
+</script>
+
+{% endblock %}

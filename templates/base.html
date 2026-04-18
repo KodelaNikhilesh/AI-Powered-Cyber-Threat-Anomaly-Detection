@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AI Powered Cyber Threat and Anomaly Detection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/animations.css">
+</head>
+<body>
+
+<!-- Page Loader -->
+<div id="loader">
+    <div class="spinner"></div>
+    <p>Loading Security Module...</p>
+</div>
+
+<!-- Floating Controls -->
+<div class="floating-controls">
+    <button onclick="toggleTheme()">🌓</button>
+    <button onclick="toggleMenu()">☰</button>
+</div>
+
+<!-- Floating Menu -->
+<div id="menu">
+    <a href="/">🏠 Dashboard</a>
+    <a href="/password">🔐 Password Security</a>
+    <a href="/packet">🌐 Packet Analyzer</a>
+    <a href="/soc">🛡️ Mini-SOC IDS</a>
+    <a href="/malware">🦠 AI Real-Time Behavioral Malware Detection</a>
+    <a href="/docs">📘 Help / Docs</a>
+
+</div>
+
+<div id="content" class="fade-in">
+    {% block content %}{% endblock %}
+</div>
+
+<script src="/static/script.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</div>
+
+</body>
+
+<!-- GLOBAL LOADER -->
+<div id="cyber-loader">
+    <div class="loader-core">
+        <div class="shield">🛡️</div>
+        <div class="scan-ring"></div>
+        <p>Securing System...</p>
+    </div>
+</div>
+
+</html>
